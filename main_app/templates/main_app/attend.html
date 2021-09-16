@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>ATTEND</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+
+    </head>
+
+    <body>
+        <h1 class="heading">Attend Class</h1>
+        <div class="container">
+
+        
+                <p class="w-message">By clicking the button below you will be marked present in class!</p>
+                
+                <form method="POST">
+                    {% csrf_token %}
+                    <button class="b-attend">ATTEND</button>
+                </form>
+                {% if status == 2 %}
+                <p class="e-message">sorry, you can't attend class more than once a day!</p>
+                {% endif %}
+
+
+                {% if status == 0 %}
+                    <p class="e-message">you gotta login first!</p>
+                    <a class="a-submit" href = "{% url 'login' %}">LOGIN</a>
+                    <a class="a-submit" href = "{% url 'register' %}">REGISTER</a>
+                {% endif %}
+
+                
+                {% if status == 3 %}
+                <p class="w-message">you have been attended successfuly</p>
+                {% endif %}
+            
+        </div>
+    </body>
+</html>
